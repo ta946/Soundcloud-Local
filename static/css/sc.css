@@ -1,0 +1,325 @@
+:root {
+    --dash_width: 200px;
+    --track_pad_y: 8px;
+}
+
+body {
+    margin: 0px;
+    background-color: gray;
+}
+
+.none {
+    display: none !important;
+}
+.inline {
+    display: inline-block;
+}
+.hidden {
+    visibility: hidden;
+}
+.noClick {
+    pointer-events: none;
+}
+.noSelect {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#dash {
+    width: var(--dash_width);
+    height: 100%;
+    display: inline-block;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    background-color: darkgray;
+}
+#dash * {
+    display: inline-block;
+}
+#load_state,
+#reset_state,
+#save_state,
+#btn_refresh,
+#btn_next,
+#btn_prev {
+    display: inline-block;
+    width: 49%;
+}
+#btn_next_unassigned {
+    display: block;
+    width: 100%;
+    height: 50px;
+}
+#btn_refresh {
+    float: right;
+}
+.w100 {
+    width: 100%;
+}
+.right {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 0;
+}
+#btn_autoplay.active {
+    background-color: #ff5500;
+}
+#index_div {
+    /*display: inline-block;*/
+    width: 50%;
+    text-align: center;
+}
+#index_reverse {
+    position: absolute;
+    left: 0;
+    color: grey;
+}
+#log {
+    background-color: grey;
+    height: 50%;
+    display: block;
+    margin: 5px 5px;
+    overflow: auto;
+}
+#log span {
+    white-space: nowrap;
+}
+#log span.error {
+    color: red;
+}
+#content {
+    /*width: 100%;*/
+    margin-right: var(--dash_width);
+}
+.track {
+    padding: 0 var(--track_pad_y);
+}
+.track.active {
+    background-color: #ff5500;
+}
+.trackTitle {
+    position: absolute;
+    left: calc((100% - var(--dash_width)) * 0.2);
+    /*width: 100%;*/
+    /*text-align: center;*/
+}
+.trackPlaylists {
+    right: calc(var(--dash_width) + 16px);
+    position: absolute;
+    margin-top: 100px;
+}
+.trackTags {
+    background-color: white;
+    left: 0;
+    position: absolute;
+    margin-top: 110px;
+    font-size: 0.75em;
+    max-width: calc(100% - var(--dash_width));
+    overflow: hidden;
+    max-height: 1em;
+}
+.btn_playlist.exists {
+    color: white;
+    background-color: red;
+    /*pointer-events: none;*/
+}
+
+.buttons * {
+    display: inline-block;
+}
+
+#input_goto_like {
+    width: 23%;
+}
+
+#volumeLabelContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+}
+#volumeLabelContainer > * {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    /*opacity: 1!important;*/
+    /*z-index: 999;*/
+}
+#volumeLabel {
+    position: relative;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+}
+.slidecontainer {
+    width: 100%;
+}
+.slider {
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7;
+    -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+    transition: opacity 0.2s;
+}
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 0.9;
+}
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #04aa6d; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #04aa6d; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+#alert {
+    background-color: lightgreen;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: var(--dash_width);
+    /*width: 100%;*/
+    /*height: 40px;*/
+    box-shadow: 0px 2px;
+    display: none;
+    z-index: 999;
+}
+#alert.visible {
+    display: block;
+}
+#alert.error {
+    background-color: crimson !important;
+}
+#alert-body {
+    text-align: center;
+    padding: 2px 0;
+}
+#alert-close {
+    float: right;
+    margin: 3px;
+    background: transparent;
+}
+.loader {
+    border: 7px solid #faa;
+    border-top: 7px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+    z-index: 999;
+    left: 45%;
+    top: 3%;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.popup-overlay {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.66);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.popup-overlay.active {
+    display: block;
+}
+.popup-close {
+    float: right;
+}
+.popup-body {
+    background: white;
+    border: 3px solid #666666;
+    width: 50%;
+    margin: 50px auto;
+    padding: 10px;
+}
+
+.add_to_playlist_track_title {
+    display: inline-block;
+}
+.add_to_playlist_track_id {
+    display: inline-block;
+}
+.add_to_playlist_playlists {
+    margin: 10px 0;
+}
+
+#btn_setup_quick_playlists {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+.setup_quick_playlists_selected .list-group-item {
+    background-color: salmon;
+}
+.setup_quick_playlists_unselected .list-group-item {
+    background-color: darkgray;
+}
+.setup_quick_playlists_footer {
+    margin-top: 10px;
+}
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    /*    padding: 0.75rem 1.25rem;*/
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: center;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+#search_likes {
+    width: 151px;
+}
+fuzzy_sr {
+    background-color: antiquewhite;
+    color: red;
+    font-weight: bold;
+}

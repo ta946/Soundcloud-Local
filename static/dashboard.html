@@ -1,0 +1,147 @@
+<!doctype html>
+<html data-bs-theme="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Soundcloud Local</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/fuzzysort.min.js"></script>
+    <script src="js/Sortable.min.js"></script>
+    <script src="js/jquery-sortable.js"></script>
+    <link href="css/sc.css" rel="stylesheet" />
+    <script src="sc_config.js"></script>
+    <script src="config.js"></script>
+    <script src="quick_playlists.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/helper_utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/sc_utils.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/render_nav.js"></script>
+    <script src="js/render_popup.js"></script>
+  </head>
+  <body>
+    <div id="alert" class="">
+      <button type="button" id="alert-close" onclick="alert_hide();">x</button>
+      <div id="alert-body">THIS IS AN ALERT</div>
+    </div>
+    <div id="dash">
+      <button id="load_state" type="button" onclick="document.activeElement.blur();load_state_fn();">
+        load state
+      </button>
+      <button type="button" id="reset_state" type="button">reset state</button>
+      <button type="button" id="save_state" onclick="document.activeElement.blur();save_state_fn();">
+        save state
+      </button>
+      <button type="button" id="btn_refresh" onclick="document.activeElement.blur();refresh();">
+        refresh
+      </button>
+      <br />
+      <div id="index_div">
+        <div id="index_reverse"></div>
+        <div id="index"></div>
+        <span>/</span>
+        <div id="likes_length"></div>
+      </div>
+      <input id="input_goto_like" placeholder="index" />
+      <button type="button" id="btn_goto_like" onclick="document.activeElement.blur();goto_like_fn();">
+        GO
+      </button>
+      <button type="button" id="btn_prev" onclick="document.activeElement.blur();prev_like();">PREV</button>
+      <button type="button" id="btn_next" onclick="document.activeElement.blur();next_like();">NEXT</button>
+      <button
+        type="button"
+        id="btn_next_unassigned"
+        onclick="document.activeElement.blur();next_unassigned_fn();"
+      >
+        NEXT UNASSIGNED
+      </button>
+      <button
+        type="button"
+        id="btn_next_assigned"
+        class="w100"
+        onclick="document.activeElement.blur();next_assigned_fn();"
+      >
+        NEXT ASSIGNED
+      </button>
+      <br />
+      <button
+        type="button"
+        id="btn_autoplay"
+        class="w100"
+        onclick="document.activeElement.blur();toggle_autoplay();"
+      >
+        autoplay
+      </button>
+      <div class="slidecontainer">
+        <div id="volumeLabelContainer">
+          <div id="volumeLabel">
+            Volume
+            <div id="volumeValue">100</div>
+          </div>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="100"
+          step="1"
+          class="slider"
+          id="volume_slider"
+          aria-label="volume_slider"
+          oninput="volume_slider_handler_debounced(this.value)"
+        />
+      </div>
+      <div id="log"></div>
+      <!-- <button
+        id="sc_shortcuts"
+        type="button"
+        class="w100"
+        onclick="openURLs();"
+      >
+        sc shortcuts
+      </button> -->
+      <!-- <input
+        id="file_input_urls"
+        type="file"
+        aria-label="input_file_urls"
+        class="none"
+        autocomplete="off"
+        multiple="multiple"
+        accept=".url"
+        onchange="readURLs(event);"
+      /> -->
+      <button
+        type="button"
+        id="filter_playlist"
+        class="w100"
+        onclick="document.activeElement.blur();init_filter_playlist();"
+      >
+        filter playlist
+      </button>
+      <input id="search_likes" placeholder="search" class="w100" />
+      <button type="button" id="btn_search_likes" onclick="document.activeElement.blur();search_likes();">
+        GO
+      </button>
+      <button
+        type="button"
+        id="btn_setup_quick_playlists"
+        class="w100"
+        onclick="document.activeElement.blur();setup_quick_playlists();"
+      >
+        setup quick playlists
+      </button>
+    </div>
+    <div class="loader none"></div>
+    <div id="content"></div>
+    <div class="popup-overlay">
+      <div class="popup-body">
+        <button class="popup-close">X</button>
+        <div class="popup-content"></div>
+      </div>
+    </div>
+  </body>
+</html>

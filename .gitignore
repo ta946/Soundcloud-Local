@@ -1,0 +1,6 @@
+.vscode/
+node_files/node_modules/
+node_files/package-lock.json
+sc_config.js
+state.json
+static/quick_playlists.js
