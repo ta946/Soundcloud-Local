@@ -2,7 +2,7 @@ function request(url, method, data, async, _param) {
   if (async === undefined || async === null) async = false;
   let res = $.ajax(url, {
     method: method,
-    // crossDomain: true,
+    cache: false,
     async: async,
     contentType: "application/json",
     data: data,
@@ -428,6 +428,7 @@ function load_state() {
   const url = `${host}/load_state`;
   let res = $.ajax(url, {
     method: "GET",
+    cache: false,
     async: false,
   });
   loaded();
@@ -456,6 +457,7 @@ function save_state() {
   const data = JSON.stringify(state);
   let res = $.ajax(url, {
     method: "POST",
+    cache: false,
     async: false,
     contentType: "application/json",
     data: data,

@@ -401,6 +401,7 @@ function save_quick_playlists() {
   const data = JSON.stringify(quick_playlists);
   let res = $.ajax(url, {
     method: "POST",
+    cache: false,
     async: false,
     contentType: "application/json",
     data: data,
