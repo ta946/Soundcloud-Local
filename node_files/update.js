@@ -14,6 +14,10 @@ const ignore_files = [
     // "config.js",
 ];
 
+async function sleep(ms) {
+    await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function compare_local_file_to_remote(file_path, url) {
     const res = await fetch(url, {
         method: "GET",
@@ -142,6 +146,7 @@ async function run_update() {
         run_setup_dependancies();
     }
     console.log("Soundcloud-Local updated.");
+    sleep(500);
 }
 
 run_update();
