@@ -122,7 +122,7 @@ async function run_update() {
     delete_folder(temp_path);
     zip_path = path.join(temp_path, "repo.zip");
     unzip_path = path.join(temp_path, "repo/");
-    download_file(repo_dl_url, zip_path);
+    await download_file(repo_dl_url, zip_path);
     unzip(zip_path, unzip_path);
     const temp_repo_path = path.join(unzip_path, `Soundcloud-Local-${branch}`);
     const repo_path = path.join(__dirname, "..");
@@ -135,7 +135,7 @@ async function run_update() {
     delete_folder(temp_path);
 
     const is_identical_package_json = await compare_local_file_to_remote(
-        "../package.json",
+        "package.json",
         repo_package_json_url,
     );
     if (!is_identical_package_json) {
