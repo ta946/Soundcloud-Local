@@ -115,7 +115,7 @@ app.post("/save_quick_playlists", function (req, res) {
 app.all("/*", async function (req, res, next) {
   console.log(`${req.method} ${req.url}`);
   let body;
-  if (req.method !== "GET") {
+  if (req.method !== "GET" && req.method !== "DELETE") {
     body = JSON.stringify(req.body);
   }
   // console.log(body);
