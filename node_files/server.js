@@ -123,6 +123,7 @@ app.all("/*", async function (req, res, next) {
   let url = `${sc_host}${req.url}`;
   const response = await fetch(url, {
     method: req.method,
+    cache: "no-store",
     headers,
     body,
   });
