@@ -4,6 +4,8 @@ interact with soundcloud on a custom website that speeds up the process of liste
 
 for first time setup, follow the instructions on this page. [setup](./setup.md)
 
+![likes_view](./docs/likes_view.jpg "likes view")
+
 ## Usage
 
 **WARNING! DO NOT MAKE ANY CHANGES DIRECTLY IN SOUNDCLOUD WHILE YOU ARE USING THIS PROGRAM!**
