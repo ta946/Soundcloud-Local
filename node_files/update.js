@@ -12,6 +12,8 @@ const repo_dl_url = `${repo_url}/archive/refs/heads/${branch}.zip`;
 const temp_path = path.join(__dirname, "tmp");
 const ignore_files = [
     // "config.js",
+    "run_sc.bat",
+    "run_sc.sh",
 ];
 
 async function sleep(ms) {
@@ -146,7 +148,6 @@ async function run_update() {
         run_setup_dependancies();
     }
     console.log("Soundcloud-Local updated.");
-    sleep(500);
 }
 
 run_update();
