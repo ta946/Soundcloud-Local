@@ -27,10 +27,11 @@ Always make sure the current "state" of the program is up-to-date before you sta
 	* click `refresh` to return to normal likes view
 * `search` will search the track name and artist name.
 	* click `refresh` or search with empty input to return to normal likes view
+* `setup quick playlists` will allow you to drag and drop playlists into the "selected" section to add them as buttons below the tracks
+	* this website was designed to work with only 1 row of quick playlists, otherwise it will scroll around and be annoying. just use the `add` button under a track to add to any playlist
 * the bottom right of a track shows the playlists it is currently added to. the playlist buttons will also be colored red
 * the bottom left of a track shows the "tags" (ie genres) the artist has added
-* top right will show an arrow facing down when the track is available for direct download from soundcloud (doesn't always work) or a cart icon that will take you to their buy website
-
+* top right will show an arrow facing down when the track is available for direct download from soundcloud (doesn't always work) or a trolley icon that will take you to their buy website
 
 ## Hotkeys
 
