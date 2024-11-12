@@ -55,7 +55,7 @@ app.post("/save_state", function (req, res) {
   if (body.length === 0) {
     error = "state empty!";
     console.log(error);
-    res.send(400, error);
+    res.status(400).send(error);
     return;
   }
   try {
@@ -65,7 +65,7 @@ app.post("/save_state", function (req, res) {
     );
   } catch (error) {
     console.log(error);
-    res.send(500, error);
+    res.status(500).send(error);
     return;
   }
   res.sendStatus(200);
@@ -78,13 +78,13 @@ app.get("/load_state", function (req, res) {
     data = fs.readFileSync("../state.json", "utf8");
   } catch (error) {
     console.log(error);
-    res.send(500, error);
+    res.status(500).send(error);
     return;
   }
   if (data.length === 0) {
     error = "state empty!";
     console.log(error);
-    res.send(400, error);
+    res.status(400).send(error);
     return;
   }
   res.json(data);
@@ -96,7 +96,7 @@ app.post("/save_quick_playlists", function (req, res) {
   if (body.length === 0) {
     error = "quick_playlists empty!";
     console.log(error);
-    res.send(400, error);
+    res.status(400).send(error);
     return;
   }
   const data = JSON.stringify(body, null, 2);
@@ -105,7 +105,7 @@ app.post("/save_quick_playlists", function (req, res) {
     fs.writeFileSync(quick_playlists_path, text);
   } catch (error) {
     console.log(error);
-    res.send(500, error);
+    res.status(500).send(error);
     return;
   }
   res.sendStatus(200);
@@ -113,9 +113,8 @@ app.post("/save_quick_playlists", function (req, res) {
 
 // catchall
 app.all("/*", async function (req, res, next) {
-  console.log(`${req.method} ${req.url}`);
   let body;
-  if (req.method !== "GET" && req.method !== "DELETE") {
+  if (req.method !== "GET") {
     body = JSON.stringify(req.body);
   }
   // console.log(body);
@@ -128,7 +127,8 @@ app.all("/*", async function (req, res, next) {
     body,
   });
   const data = await response.json();
-  res.send(data);
+  console.log(`${req.method} ${response.status} ${req.url}`);
+  res.status(response.status).send(data);
 });
 
 app.listen(port, () => {
