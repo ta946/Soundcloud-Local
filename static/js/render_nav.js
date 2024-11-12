@@ -29,10 +29,30 @@ function move_to_like(n) {
 }
 
 function prev_like(n = 1) {
+  if (isSEARCH) {
+    const track_id = get_track_id_by_index(state.index);
+    const el = $(`#${track_id}`).prev(".track");
+    if (el.length == 0) {
+      return;
+    }
+    const new_track_id = parseInt(el.attr("id"));
+    focus_to_like(new_track_id);
+    return;
+  }
   move_to_like(n);
 }
 
 function next_like(n = 1) {
+  if (isSEARCH) {
+    const track_id = get_track_id_by_index(state.index);
+    const el = $(`#${track_id}`).next(".track");
+    if (el.length == 0) {
+      return;
+    }
+    const new_track_id = parseInt(el.attr("id"));
+    focus_to_like(new_track_id);
+    return;
+  }
   move_to_like(-n);
 }
 
@@ -85,7 +105,13 @@ function update_index(index) {
   $("#likes_length").text(state.likes.length - 1);
   $(".track.active").removeClass("active");
   let id = get_track_id_by_index(state.index);
-  $(`#${id}`).addClass("active");
+  const el = $(`#${id}`);
+  el.addClass("active");
+  if (isSEARCH) {
+    if (el.length > 0) {
+      el[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
 }
 
 function update_indexes() {
@@ -97,6 +123,7 @@ function update_indexes() {
 }
 
 function next_unassigned_fn() {
+  if (isSEARCH) return;
   let idx = next_unassigned(state.index - 1);
   if (idx === undefined) return;
   goto_like(idx);
@@ -203,6 +230,7 @@ function get_playlists_with_track(id) {
 // }
 
 function search_likes() {
+  if (state.likes === null) return;
   pause();
   $("#content").empty();
   const search_text = $("#search_likes").val();
@@ -221,7 +249,7 @@ function search_likes() {
   });
   loaded();
   console.log(results);
-  for (i in results) {
+  for (let i in results) {
     if (i === "total") {
       break;
     }
@@ -252,6 +280,10 @@ function search_likes() {
       highlight_artist,
     );
     $("#content").append(html);
+  }
+  if (results.length > 0) {
+    const first_track_id = parseInt($(".track").eq(0).attr("id"));
+    focus_to_like(first_track_id);
   }
   set_volume(true);
 }

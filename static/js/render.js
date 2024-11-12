@@ -71,6 +71,7 @@ function filter_tracks(playlist_id, tracks) {
 }
 
 function render_likes(index) {
+  if (isSEARCH) return;
   let [ids, indexes] = get_rendered_tracks();
   let [start, end] = get_start_and_end_track_indexes_from_index(index);
   for (let idx of indexes) {
@@ -90,11 +91,13 @@ function render_likes(index) {
 }
 
 function refresh() {
+  isSEARCH = false;
   $("#content").empty();
   goto_like(state.index);
 }
 
 function goto_like_fn() {
+  if (isSEARCH) return;
   let val = $("#input_goto_like").val();
   $("#input_goto_like").val("");
   let i;

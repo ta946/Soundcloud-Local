@@ -24,7 +24,7 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * `filter playlist` will only show tracks in a selected playlist.
 	* At the moment there is no way to return to the normal list after filtering a playlist
 * `search` will search the track name and artist name.
-	* next/prev will not work when you have searched!
+	* click `refresh` or search with empty input to return to normal likes view
 
 
 ## Hotkeys

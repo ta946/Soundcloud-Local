@@ -233,6 +233,7 @@ function keybinds(e) {
   switch (e.keyCode) {
     case 27: // ESCAPE
       hide_popup();
+      break;
     case 16: // SHIFT
       break;
     case 17: // CONTROL
@@ -274,6 +275,8 @@ function keybinds(e) {
       break;
     case 32: // SPACE
       toggle_play();
+      e.preventDefault();
+      e.stopPropagation();
       break;
     case 109: // NUM-
       unlike(get_track_id_by_index(state.index));
