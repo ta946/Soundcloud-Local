@@ -323,7 +323,7 @@ function unlike(track_id) {
   let res = request(url, "DELETE");
   // console.log(res.responseText,res.status)
   let track_name = state.likes[state.likes_ids.indexOf(track_id)].track.title;
-  if (res.responseText == '"OK"' || res.status == 404) {
+  if (res.responseText == "OK" || res.status == 404) {
     // success
     ISUNSAVED = true;
     log("unliked.\n" + track_name + "\n" + String(track_id), (error = false));
