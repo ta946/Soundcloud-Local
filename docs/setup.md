@@ -62,4 +62,20 @@ https://nodejs.org/en/download/package-manager
 1. under `Request Headers`, find `x-datadome-clientid`, its value should look like `AKJSDHalkjdnsaKLJASBDKLJBJaslkjbdLKJBJDSlkjbsakljbjdaLKJBJ`
 1. copy the value of `x-datadome-clientid`
 1. in `sc_config.js`, paste the `x-datadome-clientid` value without any spaces into `datadome_clientid`
+1. your `sc_config.js` should now look like
+	```
+	const oauth_token = "2-123456-123456789-abcdefghijklmn";
+	const client_id = "JKSHDFKljhfkjlshfalhfalhfalkdfhs";
+	const user_id = "123456789";
+	const datadome_clientid = "AKJSDHalkjdnsaKLJASBDKLJBJaslkjbdLKJBJDSlkjbsakljbjdaLKJBJ";
+
+	if (typeof module !== "undefined" && module.exports) {
+	  module.exports = {
+	    oauth_token,
+	    client_id,
+	    user_id,
+	    datadome_clientid,
+	  };
+	}
+	```
 1. save and close `sc_config.js` and chrome

@@ -12,12 +12,12 @@ for first time setup, follow the instructions on this page. [setup](./docs/setup
 
 Setting playlists overwrites the playlist in soundcloud. if you add tracks in soundcloud directly, you can end up removing the track from the playlist!
 
-Always make sure the current "state" of the program is up-to-date before you start using it by pressing `refresh state`
+Always make sure the current "state" of the program is up-to-date before you start using it by pressing `reset state`
 
 * Run the program
 	1. WINDOWS: run `run_sc.bat`
 	1. MACOS: run `run_sc.sh`
-* Press `refresh state` to fetch all your likes and store the "state" in memory
+* Press `reset state` to fetch all your likes and store the "state" in memory
 * you can save the state on your computer by pressing `save state`, and load it again with `load state`. only do this if you need to close the program and open it up again and you are sure you have not made any changes in soundcloud directly!
 * you can see the current index of your liked track, it is numbered in reverse, `0` being your latest track
 * `index` input box lets you jump to a track if you know its index
