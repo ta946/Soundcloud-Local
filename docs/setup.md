@@ -1,5 +1,7 @@
 # [Soundcloud Local](https://github.com/ta946/Soundcloud-Local) - SETUP
 
+in the main page, click on the green `code` button then download zip. then unzip the folder anywhere you want to keep the program.
+
 ### Install `node` (to run the local web server to interact with soundcloud)
 
 1. download and install node from the node website

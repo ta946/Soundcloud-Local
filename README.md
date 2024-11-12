@@ -2,7 +2,7 @@
 
 interact with soundcloud on a custom website that speeds up the process of listening to tracks, adding to playlists and downloading
 
-for first time setup, follow the instructions on this page. [setup](./setup.md)
+for first time setup, follow the instructions on this page. [setup](./docs/setup.md)
 
 ![likes_view](./docs/likes_view.jpg "likes view")
 
