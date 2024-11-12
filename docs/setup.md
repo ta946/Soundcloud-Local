@@ -8,14 +8,14 @@ in the main page, click on the green `code` button then download zip. then unzip
 ```
 https://nodejs.org/en/download/package-manager
 ```
-	1. to test `node` is setup correctly run the following command in a terminal
+	1. to test node is setup correctly run the following command in a terminal
 	```
 	node --version
 	npm --version
 	```
-	1. you should see a version number for `node` and for `npm`
-	1. if it does not work your installation was unsuccessful or node and/or npm have not been added to your path
-1. run the script to install the node dependances
+	2. you should see a version number for node and for npm
+	3. if it does not work your installation was unsuccessful or node and/or npm have not been added to your path
+2. run the script to install the node dependances
 	1. WINDOWS: run `setup_dependancies.bat`
 	1. MACOS: run `setup_dependancies.sh`
 
@@ -28,6 +28,7 @@ https://nodejs.org/en/download/package-manager
 1. open chrome's `devtools` by pressing `F12` or right-click in chrome and click `inspect`
 1. go to the `network` tab in devtools
 1. visit [soundcloud.com](soundcloud.com) (login if you aren't already)
+1. go to the [feed](https://soundcloud.com/feed) page
 1. enable Filter in network tab by clicking the funnel icon (between the stop and magnifying glass icons)
 	an extra row with a small filter icon and input box with Filter written in it should appear
 1. in the filter input box, enter the following
@@ -54,7 +55,7 @@ https://nodejs.org/en/download/package-manager
 1. in `sc_config.js`, paste the `user_urn` numbers without any spaces into `user_id`
 1. back in the filter input box, replace `stream?` with the following
 	```
-	tracks?representation=
+	tracks?
 	```
 1. you might have multiple results, click on one that has a symbol next to it that looks like `{;}`, another way to check you selected the right one is in selected requests' subwindow on the right, under the `General` section, the second entry `Request Method` should be `GET` (if you see `OPTIONS` then select a different request)
 1. Scroll all the way down, you should see a sub-section called `Request Headers`

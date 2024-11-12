@@ -33,6 +33,26 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * the bottom left of a track shows the "tags" (ie genres) the artist has added
 * top right will show an arrow facing down when the track is available for direct download from soundcloud (doesn't always work) or a trolley icon that will take you to their buy website
 
+## workflows
+
+#### Categorizing likes into playlists
+* adding tracks to playlists in soundcloud is very slow and annoying
+* this program lets you go through your likes faster by letting you seek (small or big jumps, or to specific section using the hotkeys)
+* see which playlists a track is already in at the bottom right of the track
+* easily go to the "next unassigned" track which is not in any playlist
+* easily add your tracks to a playlist by using the quick playlist buttons or hotkeys. or by clicking the `+.add` button (or `+` hotkey) to add to any playlist
+
+#### Searching for songs
+* soundcloud takes so long to search through your likes
+* this program lets you instantly search your likes by checking both track name and artist name
+* its even faster if you've already saved the "state" previously and load the old state if its not a track you've added recently
+
+#### Downloading tracks
+* if you open too many tracks too fast on soundcloud, it will block you from loading the pages, even if all you want is the download/buy button
+* this program lets you load as many tracks as you want, and will display a button on the top right of a track with a link
+* if the link shows a arrow facing down, its a direct download from soundcloud (which can sometimes be limited and wont work)
+* if the link shows a trolley icon, its a link to ther buy website
+
 ## Hotkeys
 
 * **SPACE**: pause / play
