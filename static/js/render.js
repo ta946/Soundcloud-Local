@@ -22,8 +22,6 @@ function init(force = false) {
 }
 
 function init_filter_playlist(force = false) {
-  $("#content").empty();
-  loading();
   if (force || !state.likes || !state.likes_ids) {
     get_likes();
   }
@@ -37,14 +35,20 @@ function init_filter_playlist(force = false) {
 
 function filter_tracks_fn(track_id, playlist_id) {
   hide_popup();
+  $("#content").empty();
+  loading();
   get_playlist_tracks(playlist_id, filter_tracks);
+  loaded();
 }
 
 function filter_tracks(playlist_id, tracks) {
+  if (!state.is_filtered) {
+    state.likes_ids_unfiltered = state.likes_ids.slice();
+    state.likes_unfiltered = state.likes.slice();
+  }
   state.is_filtered = true;
-  state.likes_ids_filtered = state.likes_ids.slice();
-  let listen_later = state.playlists.find((x) => x.id == playlist_id);
-  state.likes_ids = listen_later.track_ids.slice();
+  let filtered_likes = state.playlists.find((x) => x.id == playlist_id);
+  state.likes_ids = filtered_likes.track_ids.slice();
   state.likes_ids.reverse();
   tracks.sort(function (a, b) {
     return (
@@ -62,7 +66,7 @@ function filter_tracks(playlist_id, tracks) {
     log("ERROR! track ids & tracks are not correctly sorted!", (error = true));
     return;
   }
-  loaded();
+  // loaded();
   // $("#log").html(state.log)
   update_index(state.likes.length - 1);
   goto_like(state.likes.length - 1); // render likes
@@ -91,6 +95,12 @@ function render_likes(index) {
 }
 
 function refresh() {
+  if (!!state.is_filtered) {
+    state.likes_ids = state.likes_ids_unfiltered.slice();
+    state.likes = state.likes_unfiltered.slice();
+    state.index = state.likes.length - 1;
+    state.is_filtered = false;
+  }
   isSEARCH = false;
   $("#content").empty();
   goto_like(state.index);
@@ -145,7 +155,7 @@ function create_like_html(liked_track, idx = "", title, username) {
     idx = !!idx ? idx : "";
   }
   if (!!state.is_filtered) {
-    if (state.likes_ids_filtered.indexOf(id) == -1) {
+    if (state.likes_ids_unfiltered.indexOf(id) == -1) {
       btn_unlike_none = "none";
       btn_like_none = "";
     }

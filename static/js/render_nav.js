@@ -65,8 +65,8 @@ function focus_to_like(id) {
 
 function render_unlike(id) {
   if (!!state.is_filtered) {
-    let index = state.likes_ids_filtered.indexOf(id);
-    state.likes_ids_filtered.splice(index, 1);
+    let index = state.likes_ids_unfiltered.indexOf(id);
+    state.likes_ids_unfiltered.splice(index, 1);
     $(`#${id} > .buttons > .btn_unlike`).addClass("none");
     $(`#${id} > .buttons > .btn_like`).removeClass("none");
   } else {

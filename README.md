@@ -22,7 +22,7 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * `NEXT UNASSIGNED` will jump to the next track that has not been added to any playlists
 * `NEXT ASSIGNED` will jump to the next track that is in a playlist
 * `filter playlist` will only show tracks in a selected playlist.
-	* At the moment there is no way to return to the normal list after filtering a playlist
+	* click `refresh` to return to normal likes view
 * `search` will search the track name and artist name.
 	* click `refresh` or search with empty input to return to normal likes view
 

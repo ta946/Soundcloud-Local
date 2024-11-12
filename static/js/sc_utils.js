@@ -352,7 +352,7 @@ function like(track_id) {
     // success
     ISUNSAVED = true;
     log("liked.\n" + track_name + "\n" + String(track_id), (error = false));
-    state.likes_ids_filtered.push(track_id);
+    state.likes_ids_unfiltered.push(track_id);
     $("#" + String(track_id) + " > .buttons > .btn_like").addClass("none");
     $("#" + String(track_id) + " > .buttons > .btn_unlike").removeClass("none");
   } else {
