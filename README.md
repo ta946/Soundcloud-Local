@@ -25,7 +25,7 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * `NEXT ASSIGNED` will jump to the next track that is in a playlist
 * `filter playlist` will only show tracks in a selected playlist.
 	* click `refresh` to return to normal likes view
-* `search` will search the track name and artist name.
+* `search` will search the track name, artist name and tags.
 	* click `refresh` or search with empty input to return to normal likes view
 * `setup quick playlists` will allow you to drag and drop playlists into the "selected" section to add them as buttons below the tracks
 	* this website was designed to work with only 1 row of quick playlists, otherwise it will scroll around and be annoying. just use the `add` button under a track to add to any playlist
@@ -44,7 +44,7 @@ Always make sure the current "state" of the program is up-to-date before you sta
 
 #### Searching for songs
 * soundcloud takes so long to search through your likes
-* this program lets you instantly search your likes by checking both track name and artist name
+* this program lets you instantly search your likes by checking track name, artist name and tags
 * its even faster if you've already saved the "state" previously and load the old state if its not a track you've added recently
 
 #### Downloading tracks

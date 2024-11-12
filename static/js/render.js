@@ -1,4 +1,5 @@
 function init(force = false) {
+  reset_flags();
   $("#content").empty();
   loading();
   if (force || !state.likes || !state.likes_ids) {
@@ -34,6 +35,7 @@ function init_filter_playlist(force = false) {
 }
 
 function filter_tracks_fn(track_id, playlist_id) {
+  reset_flags();
   hide_popup();
   $("#content").empty();
   loading();
@@ -94,7 +96,7 @@ function render_likes(index) {
   set_volume(true);
 }
 
-function refresh() {
+function reset_flags() {
   if (!!state.is_filtered) {
     state.likes_ids = state.likes_ids_unfiltered.slice();
     state.likes = state.likes_unfiltered.slice();
@@ -102,6 +104,10 @@ function refresh() {
     state.is_filtered = false;
   }
   isSEARCH = false;
+}
+
+function refresh() {
+  reset_flags();
   $("#content").empty();
   goto_like(state.index);
 }
@@ -134,7 +140,7 @@ function autoplay_render() {
   }
 }
 
-function create_like_html(liked_track, idx = "", title, username) {
+function create_like_html(liked_track, idx = "", title, username, genre, tags) {
   let track = liked_track.track;
   let id = track.id;
   // let permalink_url = track.permalink_url;
@@ -143,8 +149,8 @@ function create_like_html(liked_track, idx = "", title, username) {
   let like = state.likes[state.likes_ids.indexOf(id)];
   title = !!title ? title : track.title;
   username = !!username ? username : like.track.user.username;
-  let genre = like.track.genre;
-  let tags = like.track.tag_list;
+  genre = !!genre ? genre : like.track.genre;
+  tags = !!tags ? tags : like.track.tag_list;
   let btn_unlike_none = "";
   let btn_like_none = "none";
   let [playlist_ids_w_track, playlist_names_w_track] =

@@ -29,14 +29,26 @@
       <div id="alert-body">THIS IS AN ALERT</div>
     </div>
     <div id="dash">
-      <button id="load_state" type="button" onclick="document.activeElement.blur();load_state_fn();">
+      <button
+        id="load_state"
+        type="button"
+        onclick="document.activeElement.blur();load_state_fn();"
+      >
         load state
       </button>
       <button type="button" id="reset_state" type="button">reset state</button>
-      <button type="button" id="save_state" onclick="document.activeElement.blur();save_state_fn();">
+      <button
+        type="button"
+        id="save_state"
+        onclick="document.activeElement.blur();save_state_fn();"
+      >
         save state
       </button>
-      <button type="button" id="btn_refresh" onclick="document.activeElement.blur();refresh();">
+      <button
+        type="button"
+        id="btn_refresh"
+        onclick="document.activeElement.blur();refresh();"
+      >
         refresh
       </button>
       <br />
@@ -47,11 +59,27 @@
         <div id="likes_length"></div>
       </div>
       <input id="input_goto_like" placeholder="index" />
-      <button type="button" id="btn_goto_like" onclick="document.activeElement.blur();goto_like_fn();">
+      <button
+        type="button"
+        id="btn_goto_like"
+        onclick="document.activeElement.blur();goto_like_fn();"
+      >
         GO
       </button>
-      <button type="button" id="btn_prev" onclick="document.activeElement.blur();prev_like();">PREV</button>
-      <button type="button" id="btn_next" onclick="document.activeElement.blur();next_like();">NEXT</button>
+      <button
+        type="button"
+        id="btn_prev"
+        onclick="document.activeElement.blur();prev_like();"
+      >
+        PREV
+      </button>
+      <button
+        type="button"
+        id="btn_next"
+        onclick="document.activeElement.blur();next_like();"
+      >
+        NEXT
+      </button>
       <button
         type="button"
         id="btn_next_unassigned"
@@ -123,7 +151,11 @@
         filter playlist
       </button>
       <input id="search_likes" placeholder="search" class="w100" />
-      <button type="button" id="btn_search_likes" onclick="document.activeElement.blur();search_likes();">
+      <button
+        type="button"
+        id="btn_search_likes"
+        onclick="document.activeElement.blur();search_likes();"
+      >
         GO
       </button>
       <button
@@ -134,6 +166,32 @@
       >
         setup quick playlists
       </button>
+      <input
+        type="checkbox"
+        id="chk_search_title"
+        name="chk_search_title"
+        value="title"
+        checked
+        onclick="document.activeElement.blur();"
+      />
+      <label for="chk_search_title">title</label>
+      <input
+        type="checkbox"
+        id="chk_search_artist"
+        name="chk_search_artist"
+        value="artist"
+        checked
+        onclick="document.activeElement.blur();"
+      />
+      <label for="chk_search_artist">artist</label>
+      <input
+        type="checkbox"
+        id="chk_search_tags"
+        name="chk_tags"
+        value="tags"
+        onclick="document.activeElement.blur();"
+      />
+      <label for="chk_tags">tags</label>
     </div>
     <div class="loader none"></div>
     <div id="content"></div>

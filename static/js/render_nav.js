@@ -230,7 +230,19 @@ function get_playlists_with_track(id) {
 // }
 
 function search_likes() {
-  if (state.likes === null) return;
+  if (state.likes === null) {
+    alert_show("load/reset state to search!", true);
+    return;
+  }
+
+  const is_search_title = $("#chk_search_title").is(":checked");
+  const is_search_artist = $("#chk_search_artist").is(":checked");
+  const is_search_tags = $("#chk_search_tags").is(":checked");
+  if (!is_search_title && !is_search_artist && !is_search_tags) {
+    alert_show("title, artist and/or tags must be checked to search!", true);
+    return;
+  }
+
   pause();
   $("#content").empty();
   const search_text = $("#search_likes").val();
@@ -242,9 +254,25 @@ function search_likes() {
   }
   isSEARCH = true;
   loading();
+  const search_title_key = "track.title";
+  const search_artist_key = "track.user.username";
+  const search_genre_key = "track.genre";
+  const search_tags_key = "track.tag_list";
+  let keys = [];
+  if (is_search_title) {
+    keys.push(search_title_key);
+  }
+  if (is_search_artist) {
+    keys.push(search_artist_key);
+  }
+  if (is_search_tags) {
+    keys.push(search_genre_key);
+    keys.push(search_tags_key);
+  }
   const results = fuzzysort.go(search_text, state.likes, {
-    keys: ["track.title", "track.user.username"],
-    limit: 100, // don't return more results than you need!
+    keys: keys,
+    // limit: 100, // don't return more results than you need!
+    limit: 0,
     threshold: -10000, // don't return bad results
   });
   loaded();
@@ -254,21 +282,51 @@ function search_likes() {
       break;
     }
     let result = results[i];
-    let highlight_title = fuzzysort.highlight(
-      result[0],
-      "<fuzzy_sr>",
-      "</fuzzy_sr>",
-    );
-    let highlight_artist = fuzzysort.highlight(
-      result[1],
-      "<fuzzy_sr>",
-      "</fuzzy_sr>",
-    );
+    let highlight_title = null;
+    let highlight_artist = null;
+    let highlight_genre = null;
+    let highlight_tags = null;
+    if (is_search_title) {
+      const title_index = keys.indexOf(search_title_key);
+      highlight_title = fuzzysort.highlight(
+        result[title_index],
+        "<fuzzy_sr>",
+        "</fuzzy_sr>",
+      );
+    }
+    if (is_search_artist) {
+      const title_artist = keys.indexOf(search_artist_key);
+      highlight_artist = fuzzysort.highlight(
+        result[title_artist],
+        "<fuzzy_sr>",
+        "</fuzzy_sr>",
+      );
+    }
+    if (is_search_tags) {
+      const title_genre = keys.indexOf(search_genre_key);
+      highlight_genre = fuzzysort.highlight(
+        result[title_genre],
+        "<fuzzy_sr>",
+        "</fuzzy_sr>",
+      );
+      const title_tags = keys.indexOf(search_tags_key);
+      highlight_tags = fuzzysort.highlight(
+        result[title_tags],
+        "<fuzzy_sr>",
+        "</fuzzy_sr>",
+      );
+    }
     if (highlight_title === null) {
       highlight_title = result.obj.track.title;
     }
     if (highlight_artist === null) {
       highlight_artist = result.obj.track.user.username;
+    }
+    if (highlight_title === null) {
+      highlight_genre = result.obj.track.genre;
+    }
+    if (highlight_artist === null) {
+      highlight_tags = result.obj.track.tag_list;
     }
     let track_id = result.obj.track.id;
     let idx = get_track_index_by_id(track_id);
@@ -278,12 +336,18 @@ function search_likes() {
       idx,
       highlight_title,
       highlight_artist,
+      highlight_genre,
+      highlight_tags,
     );
     $("#content").append(html);
   }
   if (results.length > 0) {
     const first_track_id = parseInt($(".track").eq(0).attr("id"));
     focus_to_like(first_track_id);
+    set_volume(true);
+  } else {
+    $("#content").html(
+      `<div style="text-align: center;">no results for <b>${search_text}</b></div>`,
+    );
   }
-  set_volume(true);
 }
