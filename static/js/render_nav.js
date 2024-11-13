@@ -271,9 +271,8 @@ function search_likes() {
   }
   const results = fuzzysort.go(search_text, state.likes, {
     keys: keys,
-    // limit: 100, // don't return more results than you need!
     limit: 0,
-    threshold: -10000, // don't return bad results
+    threshold: 0.5, // don't return bad results
   });
   loaded();
   console.log(results);
@@ -288,30 +287,26 @@ function search_likes() {
     let highlight_tags = null;
     if (is_search_title) {
       const title_index = keys.indexOf(search_title_key);
-      highlight_title = fuzzysort.highlight(
-        result[title_index],
+      highlight_title = result[title_index].highlight(
         "<fuzzy_sr>",
         "</fuzzy_sr>",
       );
     }
     if (is_search_artist) {
       const title_artist = keys.indexOf(search_artist_key);
-      highlight_artist = fuzzysort.highlight(
-        result[title_artist],
+      highlight_artist = result[title_artist].highlight(
         "<fuzzy_sr>",
         "</fuzzy_sr>",
       );
     }
     if (is_search_tags) {
       const title_genre = keys.indexOf(search_genre_key);
-      highlight_genre = fuzzysort.highlight(
-        result[title_genre],
+      highlight_genre = result[title_genre].highlight(
         "<fuzzy_sr>",
         "</fuzzy_sr>",
       );
       const title_tags = keys.indexOf(search_tags_key);
-      highlight_tags = fuzzysort.highlight(
-        result[title_tags],
+      highlight_tags = result[title_tags].highlight(
         "<fuzzy_sr>",
         "</fuzzy_sr>",
       );

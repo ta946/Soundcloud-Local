@@ -127,7 +127,9 @@ app.all("/*", async function (req, res, next) {
     body,
   });
   const data = await response.json();
-  console.log(`${req.method} ${response.status} ${req.url}`);
+  console.log(
+    `${response.status} ${req.method} ${req.url.replace(client_id, "XXX")}`,
+  );
   res.status(response.status).send(data);
 });
 
