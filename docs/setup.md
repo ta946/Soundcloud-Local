@@ -5,9 +5,9 @@ in the main page, click on the green `code` button then download zip. then unzip
 ### Install `node` (to run the local web server to interact with soundcloud)
 
 1. download and install node from the node website
-```
-https://nodejs.org/en/download/package-manager
-```
+	```
+	https://nodejs.org/en/download/package-manager
+	```
 	1. to test node is setup correctly run the following command in a terminal
 	```
 	node --version
