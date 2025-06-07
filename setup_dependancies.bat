@@ -1,2 +1,2 @@
-cd node_files
+cd "%~dp0node_files"
 npm install
