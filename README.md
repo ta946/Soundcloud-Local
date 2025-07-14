@@ -60,6 +60,7 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * **shift + A / D**: large seek forward/backward
 * **S / down**: next track
 * **W / up**: previous track
+* **control + down**: jump to next unassigned track
 * **shift + S / down**: volume down
 * **shift + W / up**: volume up
 * **0 - 9**: add to quick playlist

@@ -352,7 +352,7 @@ function create_add_to_any_playlist_popup_html(
     let playlist_name = playlist.title;
     let exists = exists_in_playlist(track_id, playlist_id);
     let exists_txt = !!exists ? "exists" : "";
-    let btn_template = `<button type="button" class="btn_playlist p${playlist_id} ${exists_txt}" onclick="document.activeElement.blur();${cb.name}(${track_id},${playlist_id});">${playlist_name}</button>`;
+    let btn_template = `<button type="button" class="btn_playlist btn_add_to_playlist p${playlist_id} ${exists_txt}" onclick="document.activeElement.blur();${cb.name}(${track_id},${playlist_id});">${playlist_name}</button>`;
     playlists_html += btn_template;
   }
 

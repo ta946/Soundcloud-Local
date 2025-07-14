@@ -223,10 +223,11 @@ function keybinds(e) {
     return;
   }
   if (is_show_popup) {
-    switch (e.keyCode) {
-      case 27: // ESCAPE
-        hide_popup();
-        break;
+    if (e.keyCode == 27) { // ESCAPE
+      hide_popup();
+    }
+    if ($(".popup-content .add_to_playlist_popup")) {
+      keybinds_add_to_playlist_popup(e)
     }
     return;
   }
@@ -245,7 +246,11 @@ function keybinds(e) {
       if (e.shiftKey) {
         change_volume(false);
       } else {
-        next_like();
+        if (e.keyCode == 40 && e.ctrlKey) {
+          goto_like(next_unassigned());
+        } else {
+          next_like();
+        }
       }
       break;
     case "B".charCodeAt():
@@ -300,6 +305,69 @@ function keybinds(e) {
         add_to_playlist(get_track_id_by_index(state.index), playlist_id);
       }
       break;
+  }
+}
+
+function keybinds_add_to_playlist_popup(e) {
+  const buttons = $(".add_to_playlist_popup .btn_add_to_playlist").toArray();
+  const activeElement = document.activeElement;
+  if (!activeElement || !buttons.includes(activeElement)) {
+    return;
+  }
+
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+    e.preventDefault();
+    const currentIndex = buttons.indexOf(activeElement);
+    let nextIndex = -1;
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        nextIndex = (currentIndex > 0) ? currentIndex - 1 : buttons.length - 1;
+        break;
+      case 'ArrowRight':
+        nextIndex = (currentIndex < buttons.length - 1) ? currentIndex + 1 : 0;
+        break;
+      case 'ArrowUp':
+      case 'ArrowDown':
+        const currentRect = activeElement.getBoundingClientRect();
+        const candidates = [];
+
+        buttons.forEach((btn, index) => {
+          if (index === currentIndex) return;
+
+          const btnRect = btn.getBoundingClientRect();
+          const isBelow = btnRect.top > currentRect.top;
+          const isAbove = btnRect.top < currentRect.top;
+
+          if ((e.key === 'ArrowDown' && isBelow) || (e.key === 'ArrowUp' && isAbove)) {
+            const verticalDistance = Math.abs(btnRect.top - currentRect.top);
+            const horizontalDistance = Math.abs(btnRect.left - currentRect.left);
+            candidates.push({ index, verticalDistance, horizontalDistance });
+          }
+        });
+
+        if (candidates.length > 0) {
+          candidates.sort((a, b) => {
+            if (Math.abs(a.verticalDistance - b.verticalDistance) > 10) { // Heuristic to group by rows
+              return a.verticalDistance - b.verticalDistance;
+            }
+            return a.horizontalDistance - b.horizontalDistance;
+          });
+          nextIndex = candidates[0].index;
+        }
+        break;
+    }
+
+    if (nextIndex !== -1) {
+      buttons[nextIndex].focus();
+    }
+  } else if (e.key.length === 1 && e.key.match(/[a-z]/i)) {
+    e.preventDefault();
+    const letter = e.key.toLowerCase();
+    const targetButton = buttons.find(button => button.innerText.toLowerCase().startsWith(letter));
+    if (targetButton) {
+      targetButton.focus();
+    }
   }
 }
 
