@@ -28,7 +28,7 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * `search` will search the track name, artist name and tags.
 	* click `refresh` or search with empty input to return to normal likes view
 * `modified playlists` will show you your playlists in order of most recently modified
-* `#` next to it will show your modified playlists but without first updating the modified dates. Only saves a few seconds (ignore this, its only useful if you haven't modified playlists since the last refresh)
+* `#` next to it will show your modified playlists but without first updating the modified dates. Only saves a few seconds (ignore this, its only useful if you haven't modified playlists since the last time you did a `reset state`)
 * `setup quick playlists` will allow you to drag and drop playlists into the "selected" section to add them as buttons below the tracks. Remember to hit save when you're done
 	* this website was designed to work with only 1 row of quick playlists, otherwise it will scroll around and be annoying, so don't add too many. you can always just use the `add` button or `+` to add a track to playlists
 * the bottom right of a track shows the playlists it is currently added to. the playlist buttons will also be colored red

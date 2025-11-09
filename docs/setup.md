@@ -25,7 +25,7 @@ in the main page, click on the green `code` button then download zip. then unzip
 1. create a copy of `sc_config_template.js` in the `Soundcloud-Local` folder and rename it to `sc_config.js`
 1. open `sc_config.js` in your preferred text editor
 1. open chrome
-1. visit [soundcloud.com](soundcloud.com) (login if you aren't already)
+1. visit [soundcloud.com](https://soundcloud.com) (login if you aren't already)
 1. open chrome's `devtools` by pressing `F12` or right-click in chrome and click `inspect`
 1. go to the `network` tab in devtools
 1. go to the [feed](https://soundcloud.com/feed) page
