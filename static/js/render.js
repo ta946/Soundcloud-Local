@@ -35,9 +35,6 @@ function init_filter_playlist(force = false) {
 }
 
 function init_modified_playlists(force = false) {
-  // if (force || !state.likes || !state.likes_ids) {
-  //   get_likes();
-  // }
   if (force || !state.playlists) {
     get_playlists();
   }

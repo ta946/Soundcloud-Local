@@ -27,13 +27,16 @@ Always make sure the current "state" of the program is up-to-date before you sta
 	* click `refresh` to return to normal likes view
 * `search` will search the track name, artist name and tags.
 	* click `refresh` or search with empty input to return to normal likes view
-* `setup quick playlists` will allow you to drag and drop playlists into the "selected" section to add them as buttons below the tracks
-	* this website was designed to work with only 1 row of quick playlists, otherwise it will scroll around and be annoying. just use the `add` button under a track to add to any playlist
+* `modified playlists` will show you your playlists in order of most recently modified
+* `#` next to it will show your modified playlists but without first updating the modified dates. Only saves a few seconds (ignore this, its only useful if you haven't modified playlists since the last refresh)
+* `setup quick playlists` will allow you to drag and drop playlists into the "selected" section to add them as buttons below the tracks. Remember to hit save when you're done
+	* this website was designed to work with only 1 row of quick playlists, otherwise it will scroll around and be annoying, so don't add too many. you can always just use the `add` button or `+` to add a track to playlists
 * the bottom right of a track shows the playlists it is currently added to. the playlist buttons will also be colored red
 * the bottom left of a track shows the "tags" (ie genres) the artist has added
-* top right will show an arrow facing down when the track is available for direct download from soundcloud (doesn't always work) or a trolley icon that will take you to their buy website
+* the top right of a track will show the date you liked the track and the date it was uploaded
+* the top right will also show an arrow facing down when the track is available for direct download from soundcloud (doesn't always work) or a trolley icon that will take you to their buy website
 
-## workflows
+## Workflows
 
 #### Categorizing likes into playlists
 * adding tracks to playlists in soundcloud is very slow and annoying
@@ -51,7 +54,11 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * if you open too many tracks too fast on soundcloud, it will block you from loading the pages, even if all you want is the download/buy button
 * this program lets you load as many tracks as you want, and will display a button on the top right of a track with a link
 * if the link shows a arrow facing down, its a direct download from soundcloud (which can sometimes be limited and wont work)
-* if the link shows a trolley icon, its a link to ther buy website
+* if the link shows a trolley icon, its a link to the buy website
+
+#### View recently modified playlists
+* to find playlists that were recently added or removed from, you can click the `modified playlists` button
+* useful to find recently organized tracks so you can download them
 
 ## Hotkeys
 
@@ -67,4 +74,4 @@ Always make sure the current "state" of the program is up-to-date before you sta
 * \+: add to any playlist
 * \-: unlike track
 * **shift + 0 - 9**: seek to section of track
-* **control**: hide alert banner
+* **control**: hide alert banner / close Add to playlist popup
