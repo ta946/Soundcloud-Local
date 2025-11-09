@@ -34,6 +34,32 @@ function init_filter_playlist(force = false) {
   show_popup();
 }
 
+function init_modified_playlists(force = false) {
+  // if (force || !state.likes || !state.likes_ids) {
+  //   get_likes();
+  // }
+  if (force || !state.playlists) {
+    get_playlists();
+  }
+  $("#content").empty();
+  let modified_playlists_html = "";
+
+  const sorted_playlists = [...state.playlists].sort(
+    (a, b) => new Date(b.last_modified) - new Date(a.last_modified)
+  );
+
+  for (let playlist of sorted_playlists) {
+    let html = create_modified_playlists_item_html(playlist);
+    modified_playlists_html = `${modified_playlists_html}${html}\n`;
+  }
+  let html = `
+    <div class="modified_playlists_list">
+      ${modified_playlists_html}
+    </div>
+  `;
+  $("#content").append(html);
+}
+
 function filter_tracks_fn(track_id, playlist_id) {
   reset_flags();
   hide_popup();
@@ -140,7 +166,7 @@ function autoplay_render() {
   }
 }
 
-function create_like_html(liked_track, idx = "", title, username, genre, tags) {
+function create_like_html(liked_track, idx = "", title, username, genre, tags, upload_date, liked_date) {
   let track = liked_track.track;
   let id = track.id;
   // let permalink_url = track.permalink_url;
@@ -151,6 +177,10 @@ function create_like_html(liked_track, idx = "", title, username, genre, tags) {
   username = !!username ? username : like.track.user.username;
   genre = !!genre ? genre : like.track.genre;
   tags = !!tags ? tags : like.track.tag_list;
+  upload_date = !!upload_date ? upload_date : like.track.display_date;
+  liked_date = !!liked_date ? liked_date : like.created_at;
+  let upload_date_rel_str = timestamp_to_relative_time_str(upload_date);
+  let liked_date_rel_str = timestamp_to_relative_time_str(liked_date);
   let btn_unlike_none = "";
   let btn_like_none = "none";
   let [playlist_ids_w_track, playlist_names_w_track] =
@@ -175,6 +205,7 @@ function create_like_html(liked_track, idx = "", title, username, genre, tags) {
   }
   let template = `
         <div id="${id}" class="track">
+            <div class="trackDates">${liked_date_rel_str} | upload: ${upload_date_rel_str}</div>
             <div class="trackTitle">${username} - ${title}</div>
             <div class="trackTags">${genre} ${tags}</div>
             <div class="trackPlaylists">${playlist_names_w_track.join()}</div>
@@ -482,6 +513,18 @@ function create_setup_quick_playlists_html() {
 function create_setup_playlists_item_html(name) {
   const html = `
     <div data-id="${name}" class="list-group-item">${name}</div>
+  `;
+  return html;
+}
+
+function create_modified_playlists_item_html(playlist) {
+  let last_modified_rel_str = timestamp_to_relative_time_str(playlist.last_modified);
+  const html = `
+    <div id="${playlist.id}" class="modified_playlist_item">
+      <div class="modified_playlist_item_date">${last_modified_rel_str}</div>
+      <button type="button" class="btn_modified_playlist_filter" onclick="document.activeElement.blur();filter_tracks_fn(null, ${playlist.id});">filter</button>
+      <div class="modified_playlist_item_title"><a href="${playlist.url}">${playlist.title}</a></div>
+    </div>
   `;
   return html;
 }

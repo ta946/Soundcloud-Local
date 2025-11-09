@@ -150,7 +150,7 @@
       >
         filter playlist
       </button>
-      <input id="search_likes" placeholder="search" class="w100" />
+      <input id="search_likes" placeholder="search" />
       <button
         type="button"
         id="btn_search_likes"
@@ -192,6 +192,20 @@
         onclick="document.activeElement.blur();"
       />
       <label for="chk_search_tags">tags</label>
+      <button
+        type="button"
+        id="modified_playlists"
+        onclick="document.activeElement.blur();init_modified_playlists();"
+      >
+        modified playlists
+      </button>
+      <button
+        type="button"
+        id="modified_playlists_refreshed"
+        onclick="document.activeElement.blur();init_modified_playlists(true);"
+      >
+        #
+      </button>
     </div>
     <div class="loader none"></div>
     <div id="content"></div>

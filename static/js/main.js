@@ -11,7 +11,6 @@ var state = {
   log: "",
 };
 var ISUNSAVED = false;
-var doFOCUS = true;
 var isSEARCH = false;
 var overiFrame = -1; // hovered iframe
 var focusiFrame = -1; // focused iframe
@@ -38,22 +37,19 @@ function hooks() {
       init(true);
     });
   $(window).blur(function () {
-    if (doFOCUS) {
-      if (overiFrame != -1) {
-        // setTimeout(function(){ document.activeElement.blur(); }, 50);
-        setTimeout(function () {
-          document.activeElement.blur();
-        }, 100);
-        // console.log("overiFrame",overiFrame);
-        if (focusiFrame != overiFrame) {
-          focusiFrame = overiFrame;
-          let id = parseInt(focusiFrame.replace("iframe", ""));
-          if (isSEARCH) {
-            const idx = get_track_index_by_id(id);
-            update_index(idx);
-          } else {
-            focus_to_like(id);
-          }
+    if (document.activeElement.tagName === 'IFRAME') {
+      setTimeout(function () {
+        document.activeElement.blur();
+      }, 100);
+      // console.log("overiFrame",overiFrame);
+      if (focusiFrame != overiFrame) {
+        focusiFrame = overiFrame;
+        let id = parseInt(focusiFrame.replace("iframe", ""));
+        if (isSEARCH) {
+          const idx = get_track_index_by_id(id);
+          update_index(idx);
+        } else {
+          focus_to_like(id);
         }
       }
     }

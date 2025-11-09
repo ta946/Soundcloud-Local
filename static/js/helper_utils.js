@@ -178,6 +178,32 @@ function* range(start, end) {
   yield* range(start + step, end);
 }
 
+function timestamp_to_relative_time_str(timestamp) {
+  const now = new Date();
+  const target = new Date(timestamp);
+  const diffMs = target - now;
+
+  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+
+  const units = [
+    { unit: 'year', ms: 1000 * 60 * 60 * 24 * 365 },
+    { unit: 'month', ms: 1000 * 60 * 60 * 24 * 30 },
+    { unit: 'day', ms: 1000 * 60 * 60 * 24 },
+    { unit: 'hour', ms: 1000 * 60 * 60 },
+    { unit: 'minute', ms: 1000 * 60 },
+    { unit: 'second', ms: 1000 },
+  ];
+
+  for (const { unit, ms } of units) {
+    const diff = Math.round(diffMs / ms);
+    if (Math.abs(diff) >= 1) {
+      return rtf.format(diff, unit);
+    }
+  }
+
+  return 'just now';
+}
+
 function log(text, error = false) {
   if (error) {
     console.warn(text);
@@ -235,11 +261,6 @@ function keybinds(e) {
     case 27: // ESCAPE
       hide_popup();
       break;
-    case 16: // SHIFT
-      break;
-    case 17: // CONTROL
-      alert_hide();
-      break;
     case "N".charCodeAt():
     case "S".charCodeAt():
     case 40: // DOWN
@@ -247,7 +268,7 @@ function keybinds(e) {
         change_volume(false);
       } else {
         if (e.keyCode == 40 && e.ctrlKey) {
-          goto_like(next_unassigned());
+          next_unassigned_fn();
         } else {
           next_like();
         }
@@ -289,26 +310,41 @@ function keybinds(e) {
     case 107: // NUM+
       add_to_any_playlist_fn(get_track_id_by_index(state.index));
       break;
-    case 48 <= e.keyCode && e.keyCode <= 57: // 0-9
-    case 96 <= e.keyCode && e.keyCode <= 105: // NUM0-9
+    case 16: // SHIFT
+      break;
+    case 17: // CONTROL
+      alert_hide();
+      break;
+    default:
+    if (
+      (48 <= e.keyCode && e.keyCode <= 57) || // NUM0-9
+      (96 <= e.keyCode && e.keyCode <= 105) // 0-9
+    ) {
       let offset;
       if (48 <= e.keyCode && e.keyCode <= 57) {
-        offset = (e.keyCode - 48) / 10;
+        offset = (e.keyCode - 48);
       } else {
-        offset = (e.keyCode - 96) / 10;
+        offset = (e.keyCode - 96);
       }
       if (e.shiftKey) {
-        seek(true, offset);
+        seek(true, offset / 10);
       } else {
         const playlist = get_playlist_by_name(quick_playlists[offset]);
         const playlist_id = playlist.id;
         add_to_playlist(get_track_id_by_index(state.index), playlist_id);
       }
       break;
+    }
   }
 }
 
 function keybinds_add_to_playlist_popup(e) {
+  if (e.keyCode == 17) { // CONTROL
+     e.preventDefault();
+     hide_popup();
+     return;
+  }
+
   const buttons = $(".add_to_playlist_popup .btn_add_to_playlist").toArray();
   const activeElement = document.activeElement;
   if (!activeElement || !buttons.includes(activeElement)) {
@@ -329,6 +365,13 @@ function keybinds_add_to_playlist_popup(e) {
         break;
       case 'ArrowUp':
       case 'ArrowDown':
+        if (e.key === 'ArrowUp' & currentIndex === 0) {
+          nextIndex = buttons.length-1;
+          break;
+        } else if (e.key === 'ArrowDown' & currentIndex === buttons.length-1) {
+          nextIndex = 0;
+          break;
+        }
         const currentRect = activeElement.getBoundingClientRect();
         const candidates = [];
 

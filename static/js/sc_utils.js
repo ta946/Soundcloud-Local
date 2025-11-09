@@ -134,6 +134,11 @@ function get_playlists() {
     playlist.id = item.id;
     playlist.title = item.title;
     playlist.track_ids = item.tracks.map((x) => x.id);
+    playlist.last_modified = item.last_modified;
+    playlist.created_at = item.created_at;
+    playlist.url = item.permalink_url;
+    playlist.secret_token = item.secret_token;
+    playlist.public = item.public;
     playlists.push(playlist);
   });
   state.playlists = playlists;
